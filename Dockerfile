@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # 安装依赖
-RUN pip install --no-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # 运行 Python 脚本
 CMD ["python main.py"]
