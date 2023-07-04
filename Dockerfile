@@ -11,4 +11,4 @@ COPY . /app
 RUN pip install -r requirements.txt
 
 # 运行 Python 脚本
-CMD ["python main.py"]
+CMD ["python", "main.py"]
