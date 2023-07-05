@@ -25,6 +25,10 @@ def main():
 
     if interval_in_seconds is None:
         interval_in_seconds = 60
+    else:
+        interval_in_seconds = int(interval_in_seconds)
+
+    print(interval_in_seconds)
     schedule.every(interval_in_seconds).seconds.do(job)
 
     while True:
