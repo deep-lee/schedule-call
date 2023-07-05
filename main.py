@@ -5,10 +5,12 @@ import json
 import os
 
 def job():
-    urls = os.environ.get('URLS').split(',')
+    urls = os.environ.get('URLS')
+    if urls is None:
+        urls = "https://www.baidu.com"
 
     # 遍历配置文件中的URL
-    for url in urls:
+    for url in urls.split(','):
         try:
             # 发送GET请求
             response = requests.get(url)
@@ -19,7 +21,11 @@ def job():
 
 def main():
     # 定时任务
-    schedule.every(10).seconds.do(job)  # 每300秒执行一次，你可以根据需要调整
+    interval_in_seconds = os.environ.get('INTERVAL_IN_SECONDS')
+
+    if interval_in_seconds is None:
+        interval_in_seconds = 60
+    schedule.every(interval_in_seconds).seconds.do(job)
 
     while True:
         schedule.run_pending()
